@@ -4,11 +4,10 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "C:\\Users\\dell\\IdeaProjects\\AppiumTestNew\\src\\test\\resources\\LoginApp.feature",
-        glue ="Stepdefinitions" ,
-        plugin = {"pretty","io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
+        features = "src/test/resources/LoginApp.feature",  //Path to your feature files
+        glue ="Stepdefinitions" , // Package containg step definitions
+        plugin = {"pretty","html:target/cucumber-reports.html"}, //Report Generation
         monochrome = true
 )
-
 public class TestRunner2 {
 }
