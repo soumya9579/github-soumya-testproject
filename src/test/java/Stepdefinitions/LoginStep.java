@@ -16,6 +16,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileBrowserType;
 import io.appium.java_client.remote.MobilePlatform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -52,8 +53,7 @@ public class LoginStep  extends LoginScreen {
     }
 
        @Then("User able to register the application")
-        public void UserAbleToRegisterTheApplication()
-       {
+        public void UserAbleToRegisterTheApplication() throws InterruptedException {
            driver.findElement(By.id("org.simple.clinic.staging:id/getStartedButton")).click();
            try {
                Thread.sleep(2000);
@@ -61,17 +61,39 @@ public class LoginStep  extends LoginScreen {
                throw new RuntimeException(e);
            }
            driver.findElement(By.xpath("//android.widget.TextView[@text=\"AGREE AND CONTINUE\"]")).click();
-           driver.findElement(new AppiumBy.ByAndroidUIAutomator("new UiSelector().text(\"India\")).click()"));
-           driver.findElement(new AppiumBy.ByAndroidUIAutomator("new UiSelector().text(\"India\")).click()"));
-           driver.findElement(new AppiumBy.ByAndroidUIAutomator("new UiSelector().text(\"India\")).click()"));
+           Thread.sleep(2000);
+           driver.findElement(By.xpath("//android.widget.RadioButton[@resource-id=\"org.simple.clinic.staging:id/countryButton\" and @text=\"India\"]\n")).click();
+           Thread.sleep(2000);
+           driver.findElement(By.xpath("//android.widget.RadioButton[@resource-id=\"org.simple.clinic.staging:id/stateRadioButton\" and @text=\"Basalt\"]")).click();
+           Thread.sleep(2000);
+           driver.findElement(By.id("org.simple.clinic.staging:id/phoneNumberEditText")).sendKeys("8144437398");
+           Thread.sleep(2000);
+           driver.findElement(By.id("org.simple.clinic.staging:id/nextButton")).click();
+           Thread.sleep(2000);
+
        }
 
         @And("User launch in the home page")
-        public void Userlaunchinthehomepage()
-        {
+        public void Userlaunchinthehomepage() throws InterruptedException {
 
-        }
+//            driver.findElement(By.id("org.simple.clinic.staging:id/fullNameEditText")).sendKeys("QA Soumya");
+//            Thread.sleep(2000);
+//            driver.findElement(By.id("org.simple.clinic.staging:id/nextButton")).click();
+//            Thread.sleep(2000);
+            driver.findElement(By.id("org.simple.clinic.staging:id/pinEditText")).sendKeys("1234");
+            Thread.sleep(2000);
+//            driver.findElement(By.id("org.simple.clinic.staging:id/confirmPinEditText")).sendKeys("1234");
+//            Thread.sleep(2000);
+//            driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"org.simple.clinic.staging:id/skipButton\"]")).click();
+//            Thread.sleep(2000);
+//            driver.findElement(By.id("org.simple.clinic.staging:id/searchEditText")).sendKeys("CHC Lake Lemongrass");
+//            driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"org.simple.clinic.staging:id/facilityNameTextView\" and @text=\"CHC Lake Lemongrass\"]")).click();
+//            driver.findElement(By.id("org.simple.clinic.staging:id/yesButton")).click();
+//            driver.findElement(By.id("org.simple.clinic.staging:id/skipButton")).click();
+            String ID = driver.findElement(By.id("org.simple.clinic.staging:id/scanSimpleCardButton")).getText();
+            Assert.assertEquals(ID,"SCAN ID");
 
+    }
         @AfterTest
         public void close()
         {
