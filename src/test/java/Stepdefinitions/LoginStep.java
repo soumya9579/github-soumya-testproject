@@ -34,8 +34,8 @@ public class LoginStep  extends LoginScreen {
 
     @Test
 
-        @Given("user Launched the APP")
-        public void UserLaunchedtheApp() throws MalformedURLException, InterruptedException {
+        @Given("user Registered in the application")
+        public void UserRegisteredInTheApplication() throws MalformedURLException, InterruptedException {
 
         DesiredCapabilities dc = new DesiredCapabilities();
         dc.setCapability("appium:deviceName", "SORA's S23 FE");
@@ -49,11 +49,6 @@ public class LoginStep  extends LoginScreen {
 
         Thread.sleep(20000);
         driver.findElement(new By.ByXPath("//android.widget.Button[@resource-id=\"org.simple.clinic.staging:id/nextButton\"]")).click();
-
-    }
-
-       @Then("User able to register the application")
-        public void UserAbleToRegisterTheApplication() throws InterruptedException {
            driver.findElement(By.id("org.simple.clinic.staging:id/getStartedButton")).click();
            try {
                Thread.sleep(2000);
@@ -73,27 +68,19 @@ public class LoginStep  extends LoginScreen {
 
        }
 
-        @And("User launch in the home page")
-        public void Userlaunchinthehomepage() throws InterruptedException {
+        @Then("User able to give pin number")
+        public void UserAbletoGivePinNumber() throws InterruptedException {
 
-//            driver.findElement(By.id("org.simple.clinic.staging:id/fullNameEditText")).sendKeys("QA Soumya");
-//            Thread.sleep(2000);
-//            driver.findElement(By.id("org.simple.clinic.staging:id/nextButton")).click();
-//            Thread.sleep(2000);
+            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/pinEditText")).sendKeys("1234");
             Thread.sleep(2000);
-//            driver.findElement(By.id("org.simple.clinic.staging:id/confirmPinEditText")).sendKeys("1234");
-//            Thread.sleep(2000);
-//            driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"org.simple.clinic.staging:id/skipButton\"]")).click();
-//            Thread.sleep(2000);
-//            driver.findElement(By.id("org.simple.clinic.staging:id/searchEditText")).sendKeys("CHC Lake Lemongrass");
-//            driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"org.simple.clinic.staging:id/facilityNameTextView\" and @text=\"CHC Lake Lemongrass\"]")).click();
-//            driver.findElement(By.id("org.simple.clinic.staging:id/yesButton")).click();
-//            driver.findElement(By.id("org.simple.clinic.staging:id/skipButton")).click();
-            String ID = driver.findElement(By.id("org.simple.clinic.staging:id/scanSimpleCardButton")).getText();
-            Assert.assertEquals(ID,"SCAN ID");
+        }
+        @And("User Logged into the Home page")
+            public void UserLoggedIntoTheHomePage() throws InterruptedException {
+            Thread.sleep(2000);
+            Assert.assertEquals(driver.findElement(By.id("org.simple.clinic.staging:id/scanSimpleCardButton")).getText(),"SCAN ID");
+            }
 
-    }
         @AfterTest
         public void close()
         {

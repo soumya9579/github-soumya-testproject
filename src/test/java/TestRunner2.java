@@ -4,10 +4,13 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/LoginApp.feature",  //Path to your feature files
-        glue ="Stepdefinitions" , // Package containg step definitions
-        plugin = {"pretty","html:target/cucumber-reports.html"}, //Report Generation
+        features = "src/test/resources/LoginApp.feature",
+        glue ="Stepdefinitions" ,
+        plugin = {"pretty","html:target/Cucumber-Report"},
+        tags = "@test1",
+
         monochrome = true
+
 )
 public class TestRunner2 {
 }
