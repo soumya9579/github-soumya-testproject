@@ -6,11 +6,11 @@ import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Wait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.appium.java_client.android.AndroidDriver;
@@ -23,22 +23,17 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class RegisterStep  extends RegisterScreen {
-
     Actions Action;
     public AppiumDriver driver;
     String appiumServerUrl = "http://127.0.0.1:4723";
     private String application;
 
     @Test
-
     @Given("user Launched the APP")
     public void UserLaunchedtheApp() throws MalformedURLException, InterruptedException {
-
         DesiredCapabilities dc = new DesiredCapabilities();
         dc.setCapability("appium:deviceName", "SORA's S23 FE");
         dc.setCapability("appium:udid", "RF8N61W6JYY");
@@ -48,66 +43,36 @@ public class RegisterStep  extends RegisterScreen {
         dc.setCapability("appium:app", "/Users/dell/IdeaProjects/AppiumTestNew/src/Apk/org-simple-clinic-staging.apk");
         URL url = new URL("http://127.0.0.1:4723/");
         driver = new AppiumDriver(url,dc);
-
         Thread.sleep(20000);
         driver.findElement(new By.ByXPath("//android.widget.Button[@resource-id=\"org.simple.clinic.staging:id/nextButton\"]")).click();
 
     }
-
     @Then("User able to register the {string} with new {string}")
     public void userAbleToRegisterTheApplicationWithNewMobileNumber(String application,String mobile_number) throws InterruptedException {
-
-
         driver.findElement(By.id("org.simple.clinic.staging:id/getStartedButton")).click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         driver.findElement(By.xpath("//android.widget.TextView[@text=\"AGREE AND CONTINUE\"]")).click();
-        Thread.sleep(2000);
         driver.findElement(By.xpath("//android.widget.RadioButton[@resource-id=\"org.simple.clinic.staging:id/countryButton\" and @text=\"India\"]\n")).click();
-        Thread.sleep(2000);
         driver.findElement(By.xpath("//android.widget.RadioButton[@resource-id=\"org.simple.clinic.staging:id/stateRadioButton\" and @text=\"Basalt\"]")).click();
-        Thread.sleep(2000);
-
         driver.findElement(By.id("org.simple.clinic.staging:id/phoneNumberEditText")).sendKeys(mobile_number);
-        Thread.sleep(2000);
         driver.findElement(By.id("org.simple.clinic.staging:id/nextButton")).click();
-        Thread.sleep(2000);
-
     }
-
     @And("User launch the home page using {string} and {string}")
     public void UserlaunchinthehomepageUsingRoleAndPin(String customer_role,String PIN ) throws InterruptedException {
-
             driver.findElement(By.id("org.simple.clinic.staging:id/fullNameEditText")).sendKeys(customer_role);
-            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/nextButton")).click();
-            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/pinEditText")).sendKeys(PIN);
-            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/confirmPinEditText")).sendKeys(PIN);
-            Thread.sleep(2000);
             driver.findElement(By.xpath("//android.widget.Button[@resource-id=\"org.simple.clinic.staging:id/skipButton\"]")).click();
-            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/searchEditText")).sendKeys("CHC Lake Lemongrass");
-            Thread.sleep(2000);
             driver.findElement(By.xpath("//android.widget.TextView[@resource-id=\"org.simple.clinic.staging:id/facilityNameTextView\" and @text=\"CHC Lake Lemongrass\"]")).click();
-            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/yesButton")).click();
-            Thread.sleep(2000);
             driver.findElement(By.id("org.simple.clinic.staging:id/skipButton")).click();
-            Thread.sleep(2000);
             Assert.assertEquals(driver.findElement(By.id("org.simple.clinic.staging:id/scanSimpleCardButton")).getText(),"SCAN ID");
-
     }
     @AfterTest
-    public void close()
-    {
-        driver.quit();
-    }
-
-
+            public void close()
+            {
+            driver.quit();
+             }
 }
 

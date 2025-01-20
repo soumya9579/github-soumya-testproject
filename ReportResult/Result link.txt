@@ -4,3 +4,16 @@ https://reports.cucumber.io/reports/b0c7c8db-6080-45f7-9385-ee20f81181f7
 Login :
 https://reports.cucumber.io/reports/84e63149-3ec8-416e-99be-346c937180b5
 
+
+
+----------------------------------------
+Updated Result
+
+Registration 
+
+ https://reports.cucumber.io/reports/09fd576f-1f8c-4609-8a37-a029efcdb42e 
+
+Login
+
+https://reports.cucumber.io/reports/6409550f-e80f-43f9-b487-7ece97509eae 
+
